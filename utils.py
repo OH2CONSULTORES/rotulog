@@ -83,8 +83,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
     for i in range(total):
         if i % etiquetas_por_pag == 0 and i != 0:
             c.showPage()
-            c.setFillColor(color_hex)
-            c.rect(0, 0, w, h, fill=1)
+
 
         row = (i % etiquetas_por_pag) // cols
         col = (i % etiquetas_por_pag) % cols
