@@ -1,0 +1,6 @@
+streamlit
+pillow
+qrcode
+reportlab
+pandas
+openpyxl
