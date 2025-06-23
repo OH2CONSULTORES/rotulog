@@ -1,4 +1,5 @@
 # app.py
+import base64  # Asegúrate de tener esta importación arriba
 import streamlit as st
 from utils import generar_vista_previa, generar_pdf, imprimir_pdf
 from db import (
@@ -48,10 +49,18 @@ with col1:
         insertar_rotulo(**data)
         st.success("Guardado exitosamente.")
 
+
+
 with col2:
-    if st.button("📄 Generar PDF"):
+    if st.button("📄 Generar y Mostrar PDF"):
         pdf_bytes = generar_pdf(**data)
-        st.download_button("Descargar Rótulos PDF", data=pdf_bytes, file_name="rotulos.pdf", mime="application/pdf")
+        st.download_button("⬇️ Descargar Rótulo PDF", data=pdf_bytes, file_name="rotulo.pdf", mime="application/pdf")
+
+        # Mostrar vista previa en un iframe
+        b64_pdf = base64.b64encode(pdf_bytes).decode("utf-8")
+        pdf_display = f'<iframe src="data:application/pdf;base64,{b64_pdf}" width="100%" height="600" type="application/pdf"></iframe>'
+        st.markdown("### Vista previa del PDF")
+        st.markdown(pdf_display, unsafe_allow_html=True)
 
 with col3:
     if st.button("🖨️ Imprimir directamente"):
