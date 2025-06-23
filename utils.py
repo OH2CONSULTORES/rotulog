@@ -74,7 +74,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=A4)
     w, h = A4
-    cols, rows = 2, 4
+    cols, rows = 2, 4  # etiqueta tamaño medio ancho A4, 1/4 alto
     etiquetas_por_pag = cols * rows
     label_w, label_h = w / cols, h / rows
     color_hex = HexColor(COLORES.get(color_fondo, "#FFFFFF"))
@@ -84,30 +84,33 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         if i % etiquetas_por_pag == 0 and i != 0:
             c.showPage()
 
-
         row = (i % etiquetas_por_pag) // cols
         col = (i % etiquetas_por_pag) % cols
         x = col * label_w
         y = h - (row + 1) * label_h
 
+        # Fondo
         c.setFillColor(color_hex)
         c.rect(x, y, label_w, label_h, fill=1)
-        c.setFillColor("black")
-        c.setFont("Helvetica", 7)
 
-        margin = 5 * mm
+        # Texto
+        c.setFillColor("black")
+        c.setFont("Helvetica", 6)
+
+        margin = 6 * mm
         tx = x + margin
         ty = y + label_h - margin
 
-        c.drawString(tx, ty - 45, f"CLIENTE: {cliente}")
-        c.drawString(tx, ty - 60, f"PRODUCTO: {producto}")
-        c.drawString(tx, ty - 75, f"CANTIDAD: {cantidad} unid")
-        c.drawString(tx + 190, ty - 75, f"N° PAQUETE: {i + 1}/{total}")
-        c.drawString(tx, ty - 105, f"LOTE: {codigo_lote}")
-        c.drawString(tx, ty - 120, f"ORDEN DE COMPRA: {orden_compra}")
-        c.drawString(tx, ty - 135, f"F. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 150, f"F. VENCIMIENTO: {fecha_venc.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 190, "hola@webspackging _____________________ WhatsApp: 952721936")
+        # Texto
+        c.drawString(tx, ty - 12, f"CLIENTE: {cliente}")
+        c.drawString(tx, ty - 22, f"PRODUCTO: {producto}")
+        c.drawString(tx, ty - 32, f"CANTIDAD: {cantidad} unid")
+        c.drawString(tx, ty - 42, f"N° PAQUETE: {i + 1}/{total}")
+        c.drawString(tx, ty - 52, f"LOTE: {codigo_lote}")
+        c.drawString(tx, ty - 62, f"ORDEN DE COMPRA: {orden_compra}")
+        c.drawString(tx, ty - 72, f"F. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}")
+        c.drawString(tx, ty - 82, f"F. VENCIMIENTO: {fecha_venc.strftime('%d/%m/%Y')}")
+        c.drawString(tx, ty - 100, "hola@webspackging | WhatsApp: 952721936")
 
         # QR
         datos_qr = {
@@ -122,25 +125,25 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         qr_buffer = io.BytesIO()
         qr_img.save(qr_buffer, format="PNG")
         qr_buffer.seek(0)
-        c.drawImage(ImageReader(qr_buffer), x + label_w - 30 * mm, y + margin, 20 * mm, 20 * mm)
+        c.drawImage(ImageReader(qr_buffer), x + label_w - 27 * mm, y + margin, 20 * mm, 20 * mm)
 
         # Logos
         if logos["izquierdo"]:
             logo_buf = io.BytesIO()
             logos["izquierdo"].save(logo_buf, format="PNG")
             logo_buf.seek(0)
-            c.drawImage(ImageReader(logo_buf), x + margin, y + label_h - 15 * mm, 25 * mm, 10 * mm)
+            c.drawImage(ImageReader(logo_buf), x + margin, y + label_h - 12 * mm, 20 * mm, 8 * mm)
 
         if logos["derecho"]:
             logo_buf = io.BytesIO()
             logos["derecho"].save(logo_buf, format="PNG")
             logo_buf.seek(0)
-            c.drawImage(ImageReader(logo_buf), x + label_w - 40 * mm, y + label_h - 15 * mm, 30 * mm, 10 * mm)
+            c.drawImage(ImageReader(logo_buf), x + label_w - 30 * mm, y + label_h - 12 * mm, 20 * mm, 8 * mm)
 
     c.save()
     buffer.seek(0)
     return buffer.read()
-
+    
 def imprimir_pdf(pdf_bytes):
     """Guarda temporalmente el PDF y lo envía a la impresora predeterminada."""
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
