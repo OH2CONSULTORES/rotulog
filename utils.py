@@ -104,14 +104,12 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         # Texto
         c.drawString(tx, ty - 25, f"CLIENTE: {cliente}")
         c.drawString(tx, ty - 35, f"PRODUCTO: {producto}")
-        c.drawString(tx, ty - 45, f"CANTIDAD: {cantidad} unid")
-        c.drawString(tx, ty - 55, f"N° PAQUETE: {i + 1}/{total}")
-        c.drawString(tx, ty - 65, f"LOTE: {codigo_lote}")
-        c.drawString(tx, ty - 75, f"ORDEN DE COMPRA: {orden_compra}")
-        c.drawString(tx, ty - 85, f"F. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 95, f"F. VENCIMIENTO: {fecha_venc.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 115, "hola@webspackging | WhatsApp: 952721936")
-        c.drawString(tx, ty - 135, "📦 Este lado arriba ☂️ Mantener seco  🔄 Rotar stock (FIFO)  🏷️ Frágil  🚫🔥 Alejar de fuentes de calor")
+        c.drawString(tx, ty - 45, f"CANTIDAD: {cantidad} unid    N° PAQUETE: {i + 1}/{total}")
+        c.drawString(tx, ty - 55, f"LOTE: {codigo_lote}        ORDEN COMPRA: {orden_compra}")
+        c.drawString(tx, ty - 65, f"F. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
+        c.drawString(tx, ty - 85, "CONTACTO: hola@webspackging | WhatsApp: 952721936")
+        c.drawString(tx, ty - 105, "📦 Este lado arriba   ☂️ Mantener seco   🔄 FIFO   🏷️ Frágil   🚫🔥 Alejar de calor")
+
 
         # QR
         datos_qr = {
