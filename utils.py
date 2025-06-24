@@ -104,11 +104,11 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         # Texto
         c.drawString(tx, ty - 25, f"CLIENTE: {cliente}")
         c.drawString(tx, ty - 35, f"PRODUCTO: {producto}")
-        c.drawString(tx, ty - 45, f"CANTIDAD: {cantidad} unid    N° PAQUETE: {i + 1}/{total}")
-        c.drawString(tx, ty - 55, f"LOTE: {codigo_lote}        ORDEN COMPRA: {orden_compra}")
-        c.drawString(tx, ty - 65, f"F. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
+        c.drawString(tx, ty - 45, f"CANTIDAD: {cantidad} unid                               N° PAQUETE: {i + 1}/{total}")
+        c.drawString(tx, ty - 55, f"LOTE: {codigo_lote}                                     ORDEN COMPRA: {orden_compra}")
+        c.drawString(tx, ty - 65, f"FECHA. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    FECHA.VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
         c.drawString(tx, ty - 85, "CONTACTO: hola@webspackging | WhatsApp: 952721936")
-        c.drawString(tx, ty - 105, "📦 Este lado arriba   ☂️ Mantener seco   🔄 FIFO   🏷️ Frágil   🚫🔥 Alejar de calor")
+        c.drawString(tx, ty - 105, "☂️ Mantener seco   🔄 FIFO   🏷️ Frágil   🚫🔥 Alejar de calor")
 
 
         # QR
