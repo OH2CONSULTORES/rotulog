@@ -108,7 +108,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         c.drawString(tx, ty - 55, f"LOTE: {codigo_lote}                                     ORDEN COMPRA: {orden_compra}")
         c.drawString(tx, ty - 65, f"FECHA. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    FECHA.VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
         c.drawString(tx, ty - 85, "CONTACTO: hola@webspackging | WhatsApp: 952721936")
-        c.drawString(tx, ty - 105, "☂️ Mantener seco   🔄 FIFO   🏷️ Frágil   🚫🔥 Alejar de calor")
+        c.drawString(tx, ty - 105, "☂️ Mantener seco   🔄 FIFO   🏷️ Frágil ")
 
 
         # QR
@@ -124,7 +124,12 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         qr_buffer = io.BytesIO()
         qr_img.save(qr_buffer, format="PNG")
         qr_buffer.seek(0)
-        c.drawImage(ImageReader(qr_buffer), x + label_w - 27 * mm, y + margin, 20 * mm, 20 * mm)
+        # Posicionar el QR más arriba (ej. altura de ty - 85)
+        qr_size = 16 * mm  # más pequeño (antes era 20mm)
+        qr_x = x + label_w - qr_size - 6 * mm  # al borde derecho con margen
+        qr_y = ty - 85 - qr_size  # alineado con el texto de contacto
+        
+        c.drawImage(ImageReader(qr_buffer), qr_x, qr_y, qr_size, qr_size)
 
         # Logos
         if logos["izquierdo"]:
