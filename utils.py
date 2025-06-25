@@ -107,19 +107,19 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
 
         # Texto
         c.setFillColor("black")
-        c.setFont("Helvetica", 10)
+        c.setFont("Helvetica", 8)
 
         margin = 5 * mm
         tx = x + margin
         ty = y + label_h - margin
 
         # Texto del rótulo
-        c.drawString(tx, ty - 25, f"CLIENTE: {cliente}")
-        c.drawString(tx, ty - 35, f"PRODUCTO: {producto}")
-        c.drawString(tx, ty - 45, f"CANTIDAD: {cantidad} unid                               N° PAQUETE: {i + 1}/{total}")
-        c.drawString(tx, ty - 55, f"LOTE: {codigo_lote}                                     ORDEN COMPRA: {orden_compra}")
-        c.drawString(tx, ty - 65, f"FECHA. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    FECHA.VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 85, "hola@webspackging | WhatsApp: 952721936")
+        c.drawString(tx, ty - 35, f"CLIENTE: {cliente}")
+        c.drawString(tx, ty - 45, f"PRODUCTO: {producto}")
+        c.drawString(tx, ty - 55, f"CANTIDAD: {cantidad} unid                               N° PAQUETE: {i + 1}/{total}")
+        c.drawString(tx, ty - 65, f"LOTE: {codigo_lote}                                     ORDEN COMPRA: {orden_compra}")
+        c.drawString(tx, ty - 85, f"FECHA. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    FECHA.VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
+        c.drawString(tx, ty - 95, "hola@webspackging | WhatsApp: 952721936")
         c.drawString(tx, ty - 105, "☂️ Mantener seco   🔄 FIFO   🏷️ Frágil ")
 
         # Código QR
@@ -152,7 +152,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
             logo_buf = io.BytesIO()
             logos["derecho"].save(logo_buf, format="PNG")
             logo_buf.seek(0)
-            c.drawImage(ImageReader(logo_buf), x + label_w - 40 * mm, y + label_h - 12 * mm, 20 * mm, 8 * mm)
+            c.drawImage(ImageReader(logo_buf), x + label_w - 35 * mm, y + label_h - 12 * mm, 20 * mm, 8 * mm)
 
     c.save()
     buffer.seek(0)
