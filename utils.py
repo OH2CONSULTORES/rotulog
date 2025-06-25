@@ -107,7 +107,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
 
         # Texto
         c.setFillColor("black")
-        c.setFont("Helvetica", 6)
+        c.setFont("Helvetica", 10)
 
         margin = 5 * mm
         tx = x + margin
@@ -115,8 +115,8 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
 
         c.drawString(tx, ty - 10, f"CLIENTE: {cliente}")
         c.drawString(tx, ty - 20, f"PRODUCTO: {producto}")
-        c.drawString(tx, ty - 30, f"CANTIDAD: {cantidad} unid     N° PAQUETE: {i + 1}/{total}")
-        c.drawString(tx, ty - 40, f"LOTE: {codigo_lote}     ORDEN COMPRA: {orden_compra}")
+        c.drawString(tx, ty - 30, f"CANTIDAD: {cantidad} unid           N° PAQUETE: {i + 1}/{total}")
+        c.drawString(tx, ty - 40, f"LOTE: {codigo_lote}                 ORDEN COMPRA: {orden_compra}")
         c.drawString(tx, ty - 50, f"FECHA PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}")
         c.drawString(tx, ty - 60, f"FECHA VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
         c.drawString(tx, ty - 80, "hola@webspackging | WhatsApp: 952721936")
