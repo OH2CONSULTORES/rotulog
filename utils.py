@@ -113,14 +113,14 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         tx = x + margin
         ty = y + label_h - margin
 
-        c.drawString(tx, ty - 10, f"CLIENTE: {cliente}")
-        c.drawString(tx, ty - 20, f"PRODUCTO: {producto}")
-        c.drawString(tx, ty - 30, f"CANTIDAD: {cantidad} unid           N° PAQUETE: {i + 1}/{total}")
-        c.drawString(tx, ty - 40, f"LOTE: {codigo_lote}                 ORDEN COMPRA: {orden_compra}")
-        c.drawString(tx, ty - 50, f"FECHA PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 60, f"FECHA VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 80, "hola@webspackging | WhatsApp: 952721936")
-        c.drawString(tx, ty - 100, "☂️ Mantener seco   🔄 FIFO   🏷️ Frágil")
+        # Texto del rótulo
+        c.drawString(tx, ty - 25, f"CLIENTE: {cliente}")
+        c.drawString(tx, ty - 35, f"PRODUCTO: {producto}")
+        c.drawString(tx, ty - 45, f"CANTIDAD: {cantidad} unid                               N° PAQUETE: {i + 1}/{total}")
+        c.drawString(tx, ty - 55, f"LOTE: {codigo_lote}                                     ORDEN COMPRA: {orden_compra}")
+        c.drawString(tx, ty - 65, f"FECHA. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    FECHA.VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
+        c.drawString(tx, ty - 85, "hola@webspackging | WhatsApp: 952721936")
+        c.drawString(tx, ty - 105, "☂️ Mantener seco   🔄 FIFO   🏷️ Frágil ")
 
         # Código QR
         datos_qr = {
