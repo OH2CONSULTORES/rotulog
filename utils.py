@@ -97,7 +97,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         c.setFillColor("black")
         c.setFont("Helvetica", 6)
 
-        margin = 6 * mm
+        margin = 3 * mm
         tx = x + margin
         ty = y + label_h - margin
 
@@ -107,7 +107,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         c.drawString(tx, ty - 45, f"CANTIDAD: {cantidad} unid                               N° PAQUETE: {i + 1}/{total}")
         c.drawString(tx, ty - 55, f"LOTE: {codigo_lote}                                     ORDEN COMPRA: {orden_compra}")
         c.drawString(tx, ty - 65, f"FECHA. PRODUCCIÓN: {fecha_prod.strftime('%d/%m/%Y')}    FECHA.VENCE: {fecha_venc.strftime('%d/%m/%Y')}")
-        c.drawString(tx, ty - 85, "CONTACTO: hola@webspackging | WhatsApp: 952721936")
+        c.drawString(tx, ty - 85, "hola@webspackging | WhatsApp: 952721936")
         c.drawString(tx, ty - 105, "☂️ Mantener seco   🔄 FIFO   🏷️ Frágil ")
 
 
@@ -126,7 +126,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
         qr_buffer.seek(0)
         # Posicionar el QR más arriba (ej. altura de ty - 85)
         qr_size = 16 * mm  # más pequeño (antes era 20mm)
-        qr_x = x + label_w - qr_size - 6 * mm  # al borde derecho con margen
+        qr_x = x + label_w - qr_size - 2 * mm  # al borde derecho con margen
         qr_y = ty - 85 - qr_size  # alineado con el texto de contacto
         
         c.drawImage(ImageReader(qr_buffer), qr_x, qr_y, qr_size, qr_size)
@@ -142,7 +142,7 @@ def generar_pdf(cliente, producto, cantidad, num_paquete, codigo_lote, orden_com
             logo_buf = io.BytesIO()
             logos["derecho"].save(logo_buf, format="PNG")
             logo_buf.seek(0)
-            c.drawImage(ImageReader(logo_buf), x + label_w - 30 * mm, y + label_h - 12 * mm, 20 * mm, 8 * mm)
+            c.drawImage(ImageReader(logo_buf), x + label_w - 20 * mm, y + label_h - 12 * mm, 20 * mm, 8 * mm)
 
     c.save()
     buffer.seek(0)
